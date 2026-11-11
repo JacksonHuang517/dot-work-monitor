@@ -1,4 +1,4 @@
-FROM node:22.23.4-bookworm-slim AS auth-build
+FROM node:26.13.0-bookworm-slim AS auth-build
 WORKDIR /build/auth
 COPY auth/package.json auth/package-lock.json ./
 RUN npm ci --ignore-scripts
@@ -6,7 +6,7 @@ COPY auth/tsconfig.json ./
 COPY auth/src ./src
 RUN npm run build && npm prune --omit=dev --ignore-scripts
 
-FROM node:22.23.4-bookworm-slim
+FROM node:26.13.0-bookworm-slim
 ARG TARGETARCH
 RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv ca-certificates curl gosu \
     && rm -rf /var/lib/apt/lists/*
