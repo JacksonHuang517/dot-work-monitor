@@ -14,6 +14,6 @@
         }
     }
     handle {
-        respond "Dot Work Monitor" 200
+        respond "DotSignal for ChatGPT" 200
     }
 }

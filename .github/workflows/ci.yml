@@ -44,5 +44,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install -r requirements.txt
-      - run: docker build -t dot-work-monitor:check .
-      - run: python scripts/smoke_container.py --image dot-work-monitor:check
+      - run: docker build -t dotsignal:check .
+      - run: python scripts/smoke_container.py --image dotsignal:check

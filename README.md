@@ -1,10 +1,12 @@
-# Dot Work Monitor
+# DotSignal for ChatGPT
 
-[![CI](https://github.com/JacksonHuang517/dot-work-monitor/actions/workflows/ci.yml/badge.svg)](https://github.com/JacksonHuang517/dot-work-monitor/actions/workflows/ci.yml) · [MIT License](LICENSE)
+[![CI](https://github.com/JacksonHuang517/dotsignal/actions/workflows/ci.yml/badge.svg)](https://github.com/JacksonHuang517/dotsignal/actions/workflows/ci.yml) · [MIT License](LICENSE)
 
 [English](README.en.md) · [部署指南](docs/deployment.md) · [排障](docs/troubleshooting.md) · [安全说明](SECURITY.md)
 
-把飞书消息、待办、日历和网易企业邮箱的新邮件头，接入你自己部署的 MCP 服务，再由 ChatGPT Dot 根据真实事件提醒你。
+**让 ChatGPT 主动关注你的工作。**
+
+DotSignal 将飞书消息、待办、日程和网易企业邮箱的新邮件头接入云端事件服务，由 ChatGPT Dot 根据订阅提醒你需要回复、拍板或跟进的事项。自托管服务器独立采集，不依赖你的 Mac 在线。
 
 这是面向**单个所有者、自托管**的参考实现。服务器独立轮询，电脑关机后仍可采集；Dot 只有完成事件订阅后才会收到推送。项目已有真实云端采集验证，但每个新部署都需要自行完成飞书授权、ChatGPT 连接、订阅与通知验收。运行中的 HTTP 服务、可调用的工具或“已连接”状态，都不等于提醒链路已经打通。
 
@@ -47,8 +49,8 @@ Node 和 Python 在同一 `monitor` 容器中，Caddy 是独立容器；8560 不
 1. 获取本仓库，在仓库根目录运行初始化。敏感输入在本机终端完成，不要发送到聊天或 Issue。
 
    ```bash
-   git clone https://github.com/JacksonHuang517/dot-work-monitor.git
-   cd dot-work-monitor
+   git clone https://github.com/JacksonHuang517/dotsignal.git
+   cd dotsignal
    python3 -m venv .venv
    .venv/bin/python -m pip install -r requirements.txt
    .venv/bin/python scripts/setup.py

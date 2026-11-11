@@ -11,14 +11,14 @@ def docker(*args):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--image", default="dot-work-monitor:check")
+    p.add_argument("--image", default="dotsignal:check")
     args = p.parse_args()
     work = pathlib.Path(__file__).resolve().parents[1] / ".agent-work"
     work.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(dir=work) as temp:
         secrets = pathlib.Path(temp) / "secrets"
         generate(secrets, "synthetic-ci-app-secret")
-        name = "dot-work-monitor-smoke-" + str(os.getpid())
+        name = "dotsignal-smoke-" + str(os.getpid())
         try:
             docker(
                 "run",

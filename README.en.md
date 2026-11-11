@@ -1,8 +1,12 @@
-# Dot Work Monitor
+# DotSignal for ChatGPT
+
+[![CI](https://github.com/JacksonHuang517/dotsignal/actions/workflows/ci.yml/badge.svg)](https://github.com/JacksonHuang517/dotsignal/actions/workflows/ci.yml) · [MIT License](LICENSE)
 
 [中文](README.md) · [Deployment guide (Chinese)](docs/deployment.md) · [Troubleshooting (Chinese)](docs/troubleshooting.md) · [Security](SECURITY.md)
 
-A single-owner, self-hosted MCP service that monitors Feishu messages, tasks and calendars, plus optional NetEase enterprise-mail headers, and delivers subscribed events to ChatGPT Dot.
+**Let ChatGPT keep an eye on your work.**
+
+DotSignal connects Feishu messages, tasks and calendars, plus optional NetEase enterprise-mail headers, to cloud events for ChatGPT Dot. Subscribed events help it remind you about replies, decisions and follow-ups. Collection runs on your self-hosted server, independently of your Mac. This is a single-owner MCP service.
 
 Real cloud collection has been validated. A fresh deployment still needs its own credentials, permissions, OAuth connection, subscriptions and end-to-end notification test. A running service or successful tool call does not establish event delivery. Account and workspace access to custom MCP / Dot events depends on the platform; this project cannot enable it for every account. See the [official quickstart](https://developers.openai.com/plugins/build/app-quickstart).
 
@@ -27,6 +31,8 @@ You need Docker Compose, a public domain with working HTTPS, a Feishu custom app
 1. Run the local interactive setup from the repository root:
 
    ```bash
+   git clone https://github.com/JacksonHuang517/dotsignal.git
+   cd dotsignal
    python3 -m venv .venv
    .venv/bin/python -m pip install -r requirements.txt
    .venv/bin/python scripts/setup.py

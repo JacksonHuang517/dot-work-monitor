@@ -1,7 +1,7 @@
 /** Local authorization presentation with escaped dynamic text. */
 const escape = (s: string) => s.replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c]!);
 function document(title: string, body: string) {
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} · Dot Feishu</title><style>body{font:16px/1.65 system-ui;background:#f5f6f8;color:#18212f;margin:0;padding:48px 20px}main{max-width:480px;margin:auto;background:white;padding:32px;border:1px solid #ddd;border-radius:12px}button{padding:12px 20px;margin:8px 8px 0 0}code{overflow-wrap:anywhere}</style></head><body><main>${body}</main></body></html>`;
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} · DotSignal for ChatGPT</title><style>body{font:16px/1.65 system-ui;background:#f5f6f8;color:#18212f;margin:0;padding:48px 20px}main{max-width:480px;margin:auto;background:white;padding:32px;border:1px solid #ddd;border-radius:12px}button{padding:12px 20px;margin:8px 8px 0 0}code{overflow-wrap:anywhere}</style></head><body><main>${body}</main></body></html>`;
 }
 export function renderConsentPage(input: { displayName: string; uid: string; csrf: string; scopes?: string[] }) {
   const scopes = input.scopes ?? ['feishu:read'];

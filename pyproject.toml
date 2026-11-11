@@ -3,16 +3,16 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dot-work-monitor"
-version = "0.1.0"
-description = "Self-hosted read-only Feishu and NetEase IMAP monitoring with MCP Events for ChatGPT dots"
+name = "dotsignal"
+version = "0.1.1"
+description = "Cloud events for ChatGPT Dot: Feishu messages, tasks, calendars and NetEase email headers"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 dependencies = ["aiohttp==3.14.5", "cryptography==50.0.2"]
 
 [project.scripts]
-dot-work-monitor = "dot_feishu.server:main"
+dotsignal = "dot_feishu.server:main"
 
 [tool.setuptools.packages.find]
 include = ["dot_feishu*"]

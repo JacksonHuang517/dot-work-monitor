@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1
+
+Rebrand as **DotSignal for ChatGPT**, with the repository and installation
+commands at `JacksonHuang517/dotsignal`. Update Chinese and English introductions,
+package metadata, OAuth page titles and CI image names. Existing `/dot-feishu/`
+URLs, tool names, event names, permission scopes and the `dot_feishu` Python
+module remain compatible. No provider credentials or runtime data are included.
+
 ## 0.1.0
 
 Initial public reference release: Feishu messages, owned tasks and calendar

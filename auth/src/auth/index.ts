@@ -70,7 +70,7 @@ export function createAuthorizationServer(options: Options) {
   store.bindIssuer(issuer);
   const configuration: Configuration = {
     adapter: store.adapter, jwks: config.jwks,
-    clients: config.oauthClientId && config.oauthRedirectUris.length ? [{ client_id: config.oauthClientId, client_name: 'Dot Feishu', application_type: 'native',
+    clients: config.oauthClientId && config.oauthRedirectUris.length ? [{ client_id: config.oauthClientId, client_name: 'DotSignal for ChatGPT', application_type: 'native',
       token_endpoint_auth_method: 'none', grant_types: ['authorization_code','refresh_token'],
       response_types: ['code'], redirect_uris: config.oauthRedirectUris }] : [],
     scopes: ['openid','offline_access'],

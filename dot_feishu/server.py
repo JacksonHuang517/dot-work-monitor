@@ -114,7 +114,7 @@ class Service:
             return {
                 "protocolVersion": version,
                 "capabilities": {"tools": {}, "events": {}},
-                "serverInfo": {"name": "dot-feishu-cloud", "version": "0.1.0"},
+                "serverInfo": {"name": "dotsignal", "version": "0.1.1"},
             }
         if method == "ping":
             return {}
@@ -391,9 +391,7 @@ class Service:
         return web.json_response(out)
 
     async def health(self, req):
-        return web.json_response(
-            {"service": "dot-feishu-cloud", "ready": self.engine.healthy}
-        )
+        return web.json_response({"service": "dotsignal", "ready": self.engine.healthy})
 
 
 def create_app(

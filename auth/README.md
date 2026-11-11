@@ -1,4 +1,4 @@
-# Monitor authorization service
+# DotSignal authorization service
 
 Node 22.14 OAuth authorization server and streaming MCP front proxy. It uses `oidc-provider`, Express and JOSE with pinned package versions. This package is MIT licensed; third-party dependencies retain their own licenses. No credentials are included.
 
