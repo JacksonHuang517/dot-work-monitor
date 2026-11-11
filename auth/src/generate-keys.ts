@@ -1,0 +1,15 @@
+import { generateKeyPair, exportJWK } from 'jose';
+import { randomBytes } from 'node:crypto';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+const directory = process.argv[2];
+if (!directory) throw new Error('Usage: npm run generate-keys -- /absolute/private/directory');
+if (!directory.startsWith('/')) throw new Error('Absolute directory required');
+mkdirSync(directory,{recursive:true,mode:0o700});
+const { privateKey } = await generateKeyPair('RS256',{modulusLength:2048,extractable:true});
+const jwk = await exportJWK(privateKey);
+jwk.kid = randomBytes(16).toString('hex'); jwk.alg = 'RS256'; jwk.use = 'sig';
+writeFileSync(resolve(directory,'jwks.json'),JSON.stringify({keys:[jwk]}),{flag:'wx',mode:0o600});
+writeFileSync(resolve(directory,'cookie-keys.json'),JSON.stringify([randomBytes(48).toString('base64url')]),{flag:'wx',mode:0o600});
+writeFileSync(resolve(directory,'auth-db-key'),randomBytes(32).toString('base64'),{flag:'wx',mode:0o600});
+process.stdout.write('Created independent protected OAuth and cookie key files.\n');

@@ -1,0 +1,19 @@
+{$PUBLIC_ORIGIN} {
+    # Never enable query/body logging on OAuth paths.
+    @connector path /dot-feishu/* /.well-known/oauth-authorization-server/dot-feishu/oauth /.well-known/oauth-protected-resource/dot-feishu/mcp
+    handle @connector {
+        header Referrer-Policy no-referrer
+        reverse_proxy monitor:8560 {
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up -Forwarded
+            header_up -X-Connector-Key
+            header_up -X-Connector-Scopes
+            flush_interval -1
+        }
+    }
+    handle {
+        respond "Dot Work Monitor" 200
+    }
+}

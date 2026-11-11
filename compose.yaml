@@ -1,0 +1,57 @@
+services:
+  monitor:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      HOME: /data
+      DATA_DIR: /data
+      AUTH_HOST: 0.0.0.0
+      AUTH_TRUST_PROXY: "1"
+      AUTH_DATABASE_PATH: /data/auth.sqlite
+      FEISHU_APP_SECRET_FILE: /run/monitor-secrets/feishu-app-secret
+      OAUTH_JWKS_FILE: /run/monitor-secrets/jwks.json
+      COOKIE_KEYS_FILE: /run/monitor-secrets/cookie-keys.json
+      INTERNAL_KEY_FILE: /run/monitor-secrets/internal-key
+      AUTH_DB_KEY_FILE: /run/monitor-secrets/auth-db-key
+      ENCRYPTION_KEY_FILE: /run/monitor-secrets/state-key
+      MAIL_PASSWORD_FILE: /run/monitor-secrets/mail-password
+      LARK_CLI: /usr/local/bin/lark-cli
+      TZ: UTC
+    volumes:
+      - monitor_data:/data
+      - ./.secrets:/seed-secrets:ro
+    tmpfs:
+      - /run/monitor-secrets:mode=0700
+    expose:
+      - "8560"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8560/dot-feishu/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+  caddy:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    environment:
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:?Run scripts/setup.py first}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      monitor:
+        condition: service_healthy
+volumes:
+  monitor_data:
+  caddy_data:
+  caddy_config:
